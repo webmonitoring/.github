@@ -22,9 +22,13 @@ A clear and concise description of
 Add any other context or screenshots about the feature request here.
 -->
 
-## 👥 Stakeholders
-<!-- Tag the teams that should know about this -->
-- 
-
 ## 🏗 Implementation
 <!-- More granular steps to complete the task -->
+
+
+## 🔜 Sequela
+<!--
+The people/teams that need to take action when this issue completes.
+If there are only dev tasks here, those dev tasks should be absorbed into this ticket as a checklist in the "Implementation" section.
+-->
+- [ ] 
