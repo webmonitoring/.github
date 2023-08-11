@@ -1,9 +1,6 @@
 ---
 name: 🚀 Feature
 about: For new capabilities or enhancements
-title: ''
-labels: ''
-assignees: ''
 
 ---
 
