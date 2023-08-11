@@ -9,7 +9,7 @@ labels: "\U0001F41E bug"
 A clear and concise description of what the bug is.
 
 ## 📈 Severity vs Extent
- Extent \ Severity | Minor | Major | Critical
+ Extent \ Severity | **Minor** | **Major** | **Critical**
 ---: | :---: | :---: | :---:
 **Limited** |  |  | 
 **Significant** |  | 🔵 |
