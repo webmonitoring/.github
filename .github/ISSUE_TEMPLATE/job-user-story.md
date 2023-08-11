@@ -4,7 +4,7 @@ about: User or Job Story to Describe the feature
 title: ''
 labels: ''
 assignees: ''
-project: 'webmonitoring/3'
+projects: ["webmonitoring/3"]
 
 ---
 
