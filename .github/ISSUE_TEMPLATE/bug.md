@@ -14,7 +14,20 @@ A clear and concise description of what the bug is.
 **Limited** |  |  | 
 **Significant** |  | 🔵 |
 **Widespread** |  |  |
+<details><summary>
 
+### Priority Guide
+ 
+</summary>
+<!-- THIS IS FOR REFERENCE, NO NEED TO EDIT -->
+
+ Extent \ Severity | **Minor** | **Moderate** | **Major**
+---: | :---: | :---: | :---:
+**Limited** | MINIMAL | LOW | MEDIUM
+**Significant** | LOW | MEDIUM | HIGH
+**Widespread** | MEDIUM | HIGH | CRITICAL
+
+</details>
 
 ## 🔢 Steps to Reproduce
 Steps to reproduce the behavior:
