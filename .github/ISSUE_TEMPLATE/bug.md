@@ -1,7 +1,8 @@
 ---
 name: 🐞 Bug
 about: For issues or errors encountered
-labels: "\U0001F41E bug"
+type: "Bug"
+projects: "webmonitoring/3"
 
 ---
 

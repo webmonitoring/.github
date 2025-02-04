@@ -1,7 +1,8 @@
 ---
-name: 🛠️ Maintenance
+name: 🛠️ Task
 about: For upkeep, optimization, and security
-
+type: "Task"
+projects: "webmonitoring/3"
 ---
 
 ## 🎯 Summary

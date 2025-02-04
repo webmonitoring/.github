@@ -1,7 +1,8 @@
 ---
-name: 🚀 Feature
-about: For new capabilities or enhancements
-
+name: 🚀 Enhancement
+about: For new capabilities or improvements
+type: "Enhancement"
+projects: "webmonitoring/3"
 ---
 
 ## 🎯 Summary
