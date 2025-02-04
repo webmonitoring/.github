@@ -1,6 +1,4 @@
 ---
-name: 🛠️ Task
-about: For upkeep, optimization, and security
 projects: "webmonitoring/3"
 ---
 
