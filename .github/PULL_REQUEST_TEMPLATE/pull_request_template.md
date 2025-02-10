@@ -1,7 +1,3 @@
----
-projects: "webmonitoring/3"
----
-
 <!--
 - Reviewers: select the individuals or team to review
 - Assignees: whoever is expected to close the task should be assigned (probably you)
