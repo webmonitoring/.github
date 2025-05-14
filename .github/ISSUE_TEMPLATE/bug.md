@@ -10,11 +10,11 @@ projects: "webmonitoring/3"
 A clear and concise description of what the bug is.
 
 ## 📈 Severity vs Extent
- Extent \ Severity | **Minor** | **Major** | **Critical**
+ Extent \ Severity | **Minor** | **Major** | **Severe**
 ---: | :---: | :---: | :---:
-**Limited** |  |  | 
-**Significant** |  | 🔵 |
-**Widespread** |  |  |
+**Limited** (<1%)       |  |  | 
+**Significant** (1-10%) |  | 🔵 | 
+**Widespread** (>10%)   |  |  | 
 <details><summary>
 
 ### Priority Guide
@@ -22,11 +22,16 @@ A clear and concise description of what the bug is.
 </summary>
 <!-- THIS IS FOR REFERENCE, NO NEED TO EDIT -->
 
- Extent \ Severity | **Minor** | **Moderate** | **Major**
+ Extent \ Severity | **Minor** | **Major** | **Severe**
 ---: | :---: | :---: | :---:
-**Limited** | MINIMAL | LOW | MEDIUM
-**Significant** | LOW | MEDIUM | HIGH
-**Widespread** | MEDIUM | HIGH | CRITICAL
+**Limited** (<1%)       | MINIMAL | LOW | MEDIUM
+**Significant** (1-10%) | LOW | MEDIUM | HIGH
+**Widespread** (>10%)   | MEDIUM | HIGH | CRITICAL
+
+#### Severity
+- **Minor**: Users experience mild inconvenience; app functionality remains largely unaffected.
+- **Major**: Significant impairment of functionality, but the issue is repairable or reversible.
+- **Severe**: Critical impairment resulting in irreparable or irreversible loss of functionality.
 
 </details>
 
