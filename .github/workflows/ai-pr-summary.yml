@@ -1,0 +1,63 @@
+name: AI PR Summary
+
+on:
+  workflow_call:
+    inputs:
+      pr_number:
+        description: Pull request number to summarize
+        required: true
+        type: number
+    secrets:
+      COPILOT_TOKEN:
+        description: >
+          A personal access token (PAT) with the "Copilot Requests" permission,
+          used to authenticate GitHub Copilot CLI.
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ai-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Generate AI PR summary and comment
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ inputs.pr_number }}
+        run: |
+          gh pr diff "$PR_NUMBER" > pr.diff
+          if [ ! -s pr.diff ]; then
+            echo "PR diff is empty or could not be fetched." >&2
+            exit 1
+          fi
+
+          copilot -p "Read the file pr.diff and write a concise markdown summary of the pull request changes. Focus on what was changed, why it matters, and any notable implementation details. Write the summary to summary.md" \
+            --allow-tool='read' \
+            --allow-tool='write' \
+            --no-ask-user
+
+          if [ ! -s summary.md ]; then
+            echo "summary.md was not created or is empty." >&2
+            exit 1
+          fi
+
+          gh pr comment "$PR_NUMBER" \
+            --body "## AI Summary
+
+$(cat summary.md)"
