@@ -1,0 +1,151 @@
+name: 🚀 Feature Request
+description: Propose a new capability or enhancement for the Visualping platform.
+title: "feat: <short description>"
+labels:
+  - enhancement
+  - triage-needed
+projects:
+  - webmonitoring/3
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **For AI agents reading this issue:** This is a feature request for the Visualping monorepo (`webmonitoring/monorepo`). The repo uses TypeScript/Node.js with pnpm workspaces, Biome for linting, and Vitest for testing. Shared types live in `vp-common`; shared runtime utilities in `libs/internals`. All commit messages and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Prefer deterministic, Given/When/Then acceptance criteria and explicit TypeScript types in any generated code.
+
+  - type: input
+    id: summary
+    attributes:
+      label: 🎯 Summary
+      description: One sentence — what is the task and how will customer behaviour change?
+      placeholder: "e.g. Add Google Sheets export to the change-detection alert pipeline"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: domain_area
+    attributes:
+      label: 🏗 Affected Service / Domain
+      description: Select the primary workspace(s) this feature touches. This narrows the relevant code context for AI agents.
+      multiple: true
+      options:
+        - vp-common (shared types & schemas)
+        - libs/internals (shared runtime utilities)
+        - screenshot-worker (Chromium crawling & DOM serialisation)
+        - diff-service (DOM diff extraction, TEXT mode keyword matching)
+        - compare-worker (visual pixel diff & DOM change processing)
+        - job-service (job scheduling & notification dispatch)
+        - notification-service (email, SMS, Slack, webhook delivery)
+        - account-service (user accounts & permissions)
+        - subscription-service (billing & plan management)
+        - admin-service (internal admin tooling)
+        - search-service
+        - conductor
+        - mcp-service
+        - visualping.io (Next.js frontend)
+        - db (schema migrations)
+        - end-to-end-tests (Cypress BDD)
+        - Other / Cross-cutting
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_context
+    attributes:
+      label: 🏔 Problem / Context
+      description: |
+        Why is this needed? Describe the user friction, the current broken behaviour, or the business driver.
+        Keep problem and solution separate — do not describe the implementation here.
+      placeholder: |
+        I'm always frustrated when […]
+        The current behaviour is […]
+        This matters because […]
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: 💡 Proposed Implementation
+      description: |
+        Describe the technical approach. Include:
+        - Considered alternatives and why this one was chosen
+        - Impact on existing data flows (e.g. SQS queue shape, `vp-common` type changes)
+        - Any new `AdvancedNotificationType` enum values or `NotificationConfig` fields required
+      placeholder: |
+        The simplest approach would be […]
+        Alternative considered: […]
+        This touches the SQS message shape between diff-service and compare-worker because […]
+
+  - type: input
+    id: target_files
+    attributes:
+      label: 📁 Target Files / Codebase Areas (optional)
+      description: |
+        List the files or directories most likely to change. This feeds Copilot `#file` resolution and helps AI agents load the right context without a full `@workspace` scan.
+      placeholder: "e.g. vp-common/src/Types/BaseTypes/NotificationTypes.ts, compare-worker/src/CompareExecutor/index.ts"
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: ✅ Acceptance Criteria
+      description: |
+        Define deterministic, testable success conditions using **Given / When / Then** format.
+        - Provide exact variable names and TypeScript types where the feature touches an API or shared type.
+        - For notification changes, include the expected JSON payload shape.
+        - Vague criteria ("should be fast", "handle errors gracefully") will be rejected at triage.
+      render: markdown
+      placeholder: |
+        **Scenario 1: happy path**
+        Given a job in TEXT mode detects a change matching the keyword "price drop"
+        When the compare-worker publishes the result
+        Then the job-service dispatches a webhook notification where the payload includes:
+          ```json
+          { "keyword_matched": "price drop", "previous_text": "string", "new_text": "string" }
+          ```
+
+        **Scenario 2: edge case**
+        Given onlyImportantAlerts is true on the job's NotificationConfig
+        When the AI filter determines the change is not important
+        Then no notification of type AdvancedNotificationType is dispatched
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: notification_channels_affected
+    attributes:
+      label: 🔔 Notification Channels Affected (if applicable)
+      description: Check any delivery channels whose payload shape, handler, or routing logic will change.
+      options:
+        - label: Email (`notification-service` email handlers)
+        - label: SMS
+        - label: Slack App (`slack_app` — new integration)
+        - label: Slack Incoming Webhook (`slack` — deprecated)
+        - label: Microsoft Teams (`teams`)
+        - label: Generic Webhook (`webhook`)
+        - label: n8n Trigger (`n8n`)
+        - label: Discord (`discord`)
+        - label: Google Chat (`google_chat`)
+        - label: Google Sheets (`google_sheets`)
+
+  - type: checkboxes
+    id: compliance_checklist
+    attributes:
+      label: 🔐 Security & Compliance Checklist
+      options:
+        - label: Modifies RBAC roles or permission checks
+        - label: Alters PII data flows (email addresses, phone numbers, user content)
+        - label: Introduces or changes a database schema (migration required in `db/`)
+        - label: Adds or modifies a shared type in `vp-common` (downstream services must be retested)
+        - label: Requires new analytics / telemetry events
+        - label: Changes an SQS message contract between services
+
+  - type: textarea
+    id: sequela
+    attributes:
+      label: 🔜 Sequela
+      description: |
+        List any **non-dev** actions required after this ships (e.g. marketing copy, docs update, customer comms, support team briefing).
+        Dev-only follow-up tasks belong in the Acceptance Criteria checklist above, not here.
+      placeholder: |
+        - [ ] Update help.visualping.io article on webhook payloads
+        - [ ] Notify support team of new Google Sheets field names
