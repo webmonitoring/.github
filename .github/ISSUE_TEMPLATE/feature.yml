@@ -1,9 +1,8 @@
-name: 🚀 Feature Request
+name: 🚀 Feature (New Template)
 description: Propose a new capability or enhancement for the Visualping platform.
-title: "feat: <short description>"
+title: "<short description>"
 labels:
   - enhancement
-  - triage-needed
 projects:
   - webmonitoring/3
 body:
