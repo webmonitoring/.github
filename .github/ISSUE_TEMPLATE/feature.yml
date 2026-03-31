@@ -109,34 +109,36 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
+  - type: dropdown
     id: notification_channels_affected
     attributes:
       label: 🔔 Notification Channels Affected (if applicable)
-      description: Check any delivery channels whose payload shape, handler, or routing logic will change.
+      description: Select any delivery channels whose payload shape, handler, or routing logic will change.
+      multiple: true
       options:
-        - label: Email (`notification-service` email handlers)
-        - label: SMS
-        - label: Slack App (`slack_app` — new integration)
-        - label: Slack Incoming Webhook (`slack` — deprecated)
-        - label: Microsoft Teams (`teams`)
-        - label: Generic Webhook (`webhook`)
-        - label: n8n Trigger (`n8n`)
-        - label: Discord (`discord`)
-        - label: Google Chat (`google_chat`)
-        - label: Google Sheets (`google_sheets`)
+        - Email (`notification-service` email handlers)
+        - SMS
+        - Slack App (`slack_app` — new integration)
+        - Slack Incoming Webhook (`slack` — deprecated)
+        - Microsoft Teams (`teams`)
+        - Generic Webhook (`webhook`)
+        - n8n Trigger (`n8n`)
+        - Discord (`discord`)
+        - Google Chat (`google_chat`)
+        - Google Sheets (`google_sheets`)
 
-  - type: checkboxes
+  - type: dropdown
     id: compliance_checklist
     attributes:
       label: 🔐 Security & Compliance Checklist
+      multiple: true
       options:
-        - label: Modifies RBAC roles or permission checks
-        - label: Alters PII data flows (email addresses, phone numbers, user content)
-        - label: Introduces or changes a database schema (migration required in `db/`)
-        - label: Adds or modifies a shared type in `vp-common` (downstream services must be retested)
-        - label: Requires new analytics / telemetry events
-        - label: Changes an SQS message contract between services
+        - Modifies RBAC roles or permission checks
+        - Alters PII data flows (email addresses, phone numbers, user content)
+        - Introduces or changes a database schema (migration required in `db/`)
+        - Adds or modifies a shared type in `vp-common` (downstream services must be retested)
+        - Requires new analytics / telemetry events
+        - Changes an SQS message contract between services
 
   - type: textarea
     id: sequela
